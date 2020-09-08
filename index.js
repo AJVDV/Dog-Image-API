@@ -9,13 +9,15 @@ function getDogImages(){
 }
 
 function displayImages(data) {
+    console.log(data.message)
     const urls = data.message;
     for (let e of urls)
-        document.querySelector('.dog-images').innerHTML += `<li class="x"><img src="${e}" alt="cute dogo"></li>`;
+        document.querySelector('.dog-images').innerHTML += `<li class="x"><div class="imgContainer"><img src="${e}" alt="cute dogo"></div></li>`;
 }
 
 function clearImages() {
-    $('.dog-images').remove('x');
+    console.log("DeletingImages")
+    $('.dog-images').empty();
 }
 
 function watchForm() {
@@ -23,7 +25,6 @@ function watchForm() {
         event.preventDefault();
         clearImages();
         getDogImages();
-        displayImages();
     });
 }
 
