@@ -1,46 +1,29 @@
 'use strict';
 
-let userNumElement = 0;
 function getDogImages(){
     let userNumElement = document.querySelector('#dog-pic-number').value;
     fetch(`https://dog.ceo/api/breeds/image/random/${userNumElement}`)
     .then(response => response.json())
-    .then(data => console.log(data))
-    .then(responseJson => displayResults(responseJson))
+    .then(data => displayImages(data))
     .catch(error => alert('Something has gone wrong. Please refresh, or try again later'));
-    let imageInfo = object.message;
-    let pics = "";
-    for (i=0;i<imageInfo.length;i++){
-        pics += `<li><img src'" + images[i] + "'/><span>" + images[i] + "</span></li>`;
-    }
-/*        let ImageInfo = JSON.parse(data);
-        let pics = "";
-        for (i=0;i<imagesInfo.length;i++){
-            pics += `<li><img src='" + images[i] + "'/><span>" + images[i] + "</span></li>`;
-        }
-        */
 }
 
-function displayResults(responseJson) {
-    console.log(responseJson);
-/*
-    let imageInfo = JSON.parse(data);
-    let pics = "";
-    for (i=0;i<imageInfo.length;i++){
-        pics += `<li><img src'" + images[i] + "'/><span>" + images[i] + "</span></li>`;
-    }
-*/
-    $('.dog-pics').append(
-        pics
-    )
-    $('.results').removeClass('hidden');
+function displayImages(data) {
+    const urls = data.message;
+    for (let e of urls)
+        document.querySelector('.dog-images').innerHTML += `<li class="x"><img src="${e}" alt="cute dogo"></li>`;
+}
+
+function clearImages() {
+    $('.dog-images').remove('x');
 }
 
 function watchForm() {
     $('#js-dog-pic-form').submit(event => {
         event.preventDefault();
+        clearImages();
         getDogImages();
-        displayResults();
+        displayImages();
     });
 }
 
