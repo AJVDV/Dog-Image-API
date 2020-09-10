@@ -13,6 +13,7 @@ function displayImages(data) {
     const urls = data.message;
     for (let e of urls)
         document.querySelector('.dog-images').innerHTML += `<li class="x"><div class="imgContainer"><img src="${e}" alt="cute dogo"></div></li>`;
+    $('#results').removeClass('hidden');
 }
 
 function clearImages() {
